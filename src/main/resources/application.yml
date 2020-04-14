@@ -1,0 +1,18 @@
+server:
+  error:
+    include-stacktrace: never
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:worstmovie
+    driver-class-name: org.h2.Driver
+    username: worstmovie
+    password: change#Me
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+#    show-sql: true
+#  h2:
+#    console:
+#      enabled: true

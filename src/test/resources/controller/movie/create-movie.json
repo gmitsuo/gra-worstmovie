@@ -1,0 +1,11 @@
+{
+  "year": 2000,
+  "title": "Just A Movie Title",
+  "studios": [
+    "A Studio"
+  ],
+  "producers": [
+    "John Doe"
+  ],
+  "winner": true
+}
