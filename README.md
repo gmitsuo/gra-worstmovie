@@ -1,6 +1,6 @@
 # Golden Raspberry Worst Award Movie App 
 
-## #Required:
+### Required:
 - JDK 11
 
 ### How to run:
