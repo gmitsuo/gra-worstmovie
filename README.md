@@ -1,9 +1,9 @@
-#Golden Raspberry Worst Award Movie App 
+# Golden Raspberry Worst Award Movie App 
 
-###Required:
+## #Required:
 - JDK 11
 
-###How to run:
+### How to run:
 - Tests:
     - `./mvnw clean test`
 - Build:
