@@ -26,6 +26,26 @@ class ProducerTest {
     }
 
     @Test
+    void onlyOneAwardWinningShouldNotHaveInterval() {
+
+        var producer = new Producer();
+
+        List<Producer> producers = List.of(producer);
+        List<Studio> studios = Collections.emptyList();
+
+        var movie5 = new Movie(1914, "5", false, studios, producers);
+        var movie4 = new Movie(1912, "4", false, studios, producers);
+        var movie3 = new Movie(1909, "3", false, studios, producers);
+        var movie2 = new Movie(1905, "2", false, studios, producers);
+        var movie1 = new Movie(1900, "1", true, studios, producers);
+
+        producer.setMovies(List.of(movie5, movie4, movie3, movie2, movie1));
+
+        assertThat(producer.getMinWinningInterval())
+        .isEmpty();
+    }
+
+    @Test
     void shouldReturnWithMinimalInterval() {
 
         var producer = new Producer();

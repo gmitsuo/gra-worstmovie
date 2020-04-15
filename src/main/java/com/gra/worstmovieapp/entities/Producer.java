@@ -56,15 +56,18 @@ public class Producer {
 
     public Optional<Interval> getMinWinningInterval() {
 
-        //Only producers with more than 2 movies can have interval
-        if (this.movies == null || this.movies.size() < 2)
+        //Only producers with movies...
+        if (this.movies == null)
             return  Optional.empty();
 
-        //Sort movies by year and remove non award winners
         var sortedMovies = this.movies.stream()
         .filter(Movie::isWinner)
         .sorted(comparing(Movie::getYear))
         .collect(toList());
+
+        //... or more than 2 award winning movies can have interval
+        if (sortedMovies.size() < 2)
+            return Optional.empty();
 
         //Calculate interval between each of the subsequent award winning movie...
         return range(0, sortedMovies.size() - 1)
