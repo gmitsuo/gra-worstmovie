@@ -15,10 +15,10 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.http.HttpHeaders.LOCATION;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -60,6 +60,7 @@ class MovieControllerTest {
             .content(requestBody)
         )
         .andExpect(status().isCreated())
+        .andExpect(header().string(LOCATION, "http://localhost/movie/197"))
         .andReturn().getResponse().getContentAsString();
 
         assertThat(new ObjectMapper().readValue(responseBody, MovieBody.class))
