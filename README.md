@@ -1,4 +1,4 @@
-# Golden Raspberry Worst Award Movie App 
+# Golden Raspberry Worst Movie Award App 
 
 ### Required:
 - JDK 11
@@ -11,5 +11,5 @@
     - Docker image: make sure docker is running and `./mvn clean spring-boot:build-image`
 - The app:
     - Maven: `./mvnw spring-boot:run [-Dspring-boot.run.arguments=--server.port=8080]`
-    - Jar: `java -jar ./target/worstmovieapp-0.0.1-SNAPSHOT.jar --server.port=9090`
+    - Jar: `java -jar ./target/worstmovieapp-0.0.1-SNAPSHOT.jar [--server.port=8080]`
     - Docker container: `docker run --rm -p 8080:8080 worstmovieapp:0.0.1-SNAPSHOT`
