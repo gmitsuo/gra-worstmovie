@@ -27,8 +27,7 @@ public class AwardsService {
 
             //Get all minimal interval from award winning producers...
             var producersWinningIntervals = producers.stream()
-            .map(ProducerWinningInterval::fromProducer)
-            .filter(Optional::isPresent).map(Optional::get)
+            .flatMap(ProducerWinningInterval::fromProducer)
             .sorted(comparing(ProducerWinningInterval::getInterval).reversed())
             .collect(toList());
             //... ordered by interval descending...

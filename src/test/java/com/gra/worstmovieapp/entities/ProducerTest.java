@@ -1,5 +1,6 @@
 package com.gra.worstmovieapp.entities;
 
+import com.gra.worstmovieapp.entities.dto.Interval;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
@@ -11,7 +12,7 @@ class ProducerTest {
 
     @Test
     void noMovieShouldReturnNoInterval() {
-        assertThat(new Producer().getMinWinningInterval())
+        assertThat(new Producer().getWinningIntervals())
         .isEmpty();
     }
 
@@ -21,7 +22,7 @@ class ProducerTest {
         var producer = new Producer();
         producer.setMovies(List.of(new Movie()));
 
-        assertThat(producer.getMinWinningInterval())
+        assertThat(producer.getWinningIntervals())
         .isEmpty();
     }
 
@@ -41,12 +42,12 @@ class ProducerTest {
 
         producer.setMovies(List.of(movie5, movie4, movie3, movie2, movie1));
 
-        assertThat(producer.getMinWinningInterval())
+        assertThat(producer.getWinningIntervals())
         .isEmpty();
     }
 
     @Test
-    void shouldReturnWithMinimalInterval() {
+    void shouldReturnWithWinningIntervals() {
 
         var producer = new Producer();
 
@@ -61,12 +62,12 @@ class ProducerTest {
 
         producer.setMovies(List.of(movie5, movie4, movie3, movie2, movie1));
 
-        assertThat(producer.getMinWinningInterval())
-        .isNotEmpty().get()
-        .matches(interval ->
-            interval.getDiff().equals(2) &&
-            interval.getPrevious().equals(1912) &&
-            interval.getFollowing().equals(1914)
+        assertThat(producer.getWinningIntervals())
+        .isNotEmpty().containsOnly(
+            new Interval(1900, 1905),
+            new Interval(1905, 1909),
+            new Interval(1909, 1912),
+            new Interval(1912, 1914)
         );
     }
 
@@ -85,12 +86,10 @@ class ProducerTest {
 
         producer.setMovies(List.of(movie4, movie3, movie2, movie1));
 
-        assertThat(producer.getMinWinningInterval())
-        .isNotEmpty().get()
-        .matches(interval ->
-            interval.getDiff().equals(2) &&
-            interval.getPrevious().equals(1903) &&
-            interval.getFollowing().equals(1905)
+        assertThat(producer.getWinningIntervals())
+        .isNotEmpty().containsOnly(
+            new Interval(1900, 1903),
+            new Interval(1903, 1905)
         );
     }
 }

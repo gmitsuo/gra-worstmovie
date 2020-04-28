@@ -5,8 +5,8 @@ import com.gra.worstmovieapp.entities.dto.Interval;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.StringJoiner;
+import java.util.stream.Stream;
 
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
@@ -54,11 +54,11 @@ public class Producer {
         this.movies = movies;
     }
 
-    public Optional<Interval> getMinWinningInterval() {
+    public Stream<Interval> getWinningIntervals() {
 
         //Only producers with movies...
         if (this.movies == null)
-            return  Optional.empty();
+            return Stream.empty();
 
         var sortedMovies = this.movies.stream()
         .filter(Movie::isWinner)
@@ -67,7 +67,7 @@ public class Producer {
 
         //... or more than 2 award winning movies can have interval
         if (sortedMovies.size() < 2)
-            return Optional.empty();
+            return Stream.empty();
 
         //Calculate interval between each of the subsequent award winning movie...
         return range(0, sortedMovies.size() - 1)
@@ -75,8 +75,7 @@ public class Producer {
             Integer previousWin = sortedMovies.get(index).getYear();
             Integer followingWin = sortedMovies.get(index+1).getYear();
             return new Interval(previousWin, followingWin);
-        })
-        .min(comparing(Interval::getDiff));
+        });
         //... and return the min interval value among all
     }
 

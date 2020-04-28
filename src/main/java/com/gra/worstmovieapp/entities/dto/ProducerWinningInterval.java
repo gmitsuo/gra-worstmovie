@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gra.worstmovieapp.entities.Producer;
 
 import java.util.Objects;
-import java.util.Optional;
 import java.util.StringJoiner;
+import java.util.stream.Stream;
 
 public class ProducerWinningInterval {
 
@@ -68,8 +68,8 @@ public class ProducerWinningInterval {
                 .toString();
     }
 
-    public static Optional<ProducerWinningInterval> fromProducer(Producer producer) {
-        return producer.getMinWinningInterval().map(minInterval -> {
+    public static Stream<ProducerWinningInterval> fromProducer(Producer producer) {
+        return producer.getWinningIntervals().map(minInterval -> {
             String name = producer.getName();
             Integer interval = minInterval.getDiff();
             Integer previousWin = minInterval.getPrevious();
